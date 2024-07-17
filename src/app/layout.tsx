@@ -31,14 +31,12 @@ export default function RootLayout({
                   defaultBg: '#ecfeff',
                   colorText: '#422AFB'
                 },
-                Input: {
-                  colorBgContainer: '#f0f9ff',
-                  lineWidth: 0,
-                  controlHeight: 38
-                },
                 Progress: {
                   defaultColor: '#422AFB'
                 }
+              },
+              token: {
+                colorPrimary: '#422AFB'
               }
             }}
           >

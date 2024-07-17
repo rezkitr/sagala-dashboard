@@ -5,17 +5,19 @@ import { Button, Popconfirm, Progress, Space, Table, type TableProps } from 'ant
 import { useContext } from 'react';
 
 import { DataTablesContext } from '@/context/DataTablesContext';
-import { IDevelopmentData } from '@/interfaces';
+import { IDevelopmentItem } from '@/interfaces';
 
 import { dateFormats, techTypeData } from '@/utils/config';
 import { DeleteOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import TableHeader from './TableHeader';
+import AddDevelopmentItem from './modals/AddDevelopmentItem';
 
 const DevelopmentTable = () => {
-  const { developmentData, deleteDevelopmentItem } = useContext(DataTablesContext);
+  const { developmentData, deleteDevelopmentItem, setOpenAddDevelopmentItemModal } =
+    useContext(DataTablesContext);
 
-  const columns: TableProps<IDevelopmentData>['columns'] = [
+  const columns: TableProps<IDevelopmentItem>['columns'] = [
     {
       title: 'Name',
       dataIndex: 'name',
@@ -65,8 +67,12 @@ const DevelopmentTable = () => {
 
   return (
     <div>
-      <TableHeader title="Development Table" />
+      <TableHeader
+        title="Development Table"
+        onAddItem={() => setOpenAddDevelopmentItemModal(true)}
+      />
       <Table columns={columns} dataSource={developmentData} />
+      <AddDevelopmentItem />
     </div>
   );
 };

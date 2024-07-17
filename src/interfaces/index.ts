@@ -6,7 +6,7 @@ export interface INavItem {
   icon: React.ReactNode;
 }
 
-export interface IDevelopmentData {
+export interface IDevelopmentItem {
   id: string;
   name: string;
   tech: string[];

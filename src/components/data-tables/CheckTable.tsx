@@ -1,3 +1,5 @@
+'use client';
+
 import { Table, type TableProps } from 'antd';
 
 import TableHeader from './TableHeader';
@@ -35,7 +37,7 @@ const columns: TableProps<DataType>['columns'] = [
 const CheckTable = () => {
   return (
     <div>
-      <TableHeader title="Check Table" />
+      <TableHeader title="Check Table" onAddItem={() => {}} />
       <Table columns={columns} dataSource={[]} />
     </div>
   );

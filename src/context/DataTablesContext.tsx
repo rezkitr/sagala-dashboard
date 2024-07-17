@@ -4,11 +4,14 @@
 
 import React, { createContext, useState } from 'react';
 
-import { IDevelopmentData } from '@/interfaces';
+import { IDevelopmentItem } from '@/interfaces';
 import { techTypeData } from '@/utils/config';
 
 interface DataTablesContextValues {
-  developmentData: IDevelopmentData[];
+  openAddDevelopmentItemModal: boolean;
+  setOpenAddDevelopmentItemModal: (v: boolean) => void;
+  developmentData: IDevelopmentItem[];
+  addDevelopmentItem: (d: IDevelopmentItem) => void;
   deleteDevelopmentItem: (id: string) => void;
 }
 
@@ -16,7 +19,8 @@ interface DataTablesContextValues {
 export const DataTablesContext = createContext<DataTablesContextValues>();
 
 const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [developmentData, setDevelopmentData] = useState<IDevelopmentData[]>([
+  const [openAddDevelopmentItemModal, setOpenAddDevelopmentItemModal] = useState<boolean>(false);
+  const [developmentData, setDevelopmentData] = useState<IDevelopmentItem[]>([
     {
       id: 'dev-1',
       name: 'Marketplace',
@@ -33,13 +37,26 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   ]);
 
+  const addDevelopmentItem = (item: IDevelopmentItem) => {
+    const newData = [...developmentData, item];
+    setDevelopmentData(newData);
+  };
+
   const deleteDevelopmentItem = (id: string) => {
     const newData = developmentData.filter((data) => data.id !== id);
     setDevelopmentData(newData);
   };
 
   return (
-    <DataTablesContext.Provider value={{ developmentData, deleteDevelopmentItem }}>
+    <DataTablesContext.Provider
+      value={{
+        openAddDevelopmentItemModal,
+        setOpenAddDevelopmentItemModal,
+        developmentData,
+        addDevelopmentItem,
+        deleteDevelopmentItem
+      }}
+    >
       {children}
     </DataTablesContext.Provider>
   );

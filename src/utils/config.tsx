@@ -46,14 +46,17 @@ export const navItems: INavItem[] = [
 
 export const techTypeData = {
   android: {
+    label: 'Android',
     key: 'android',
     icon: <AndroidOutlined />
   },
   ios: {
+    label: 'iOS',
     key: 'ios',
     icon: <AppleOutlined />
   },
   windows: {
+    label: 'Windows',
     key: 'windows',
     icon: <WindowsOutlined />
   }
