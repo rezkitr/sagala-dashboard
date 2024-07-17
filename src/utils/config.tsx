@@ -16,27 +16,27 @@ export const navItems: INavItem[] = [
   },
   {
     title: 'NFT Marketplace',
-    path: '/',
+    path: '/nft-marketplace',
     icon: <ShoppingCartOutlined />
   },
   {
     title: 'Data Tables',
-    path: '/',
+    path: '/data-tables',
     icon: <BarChartOutlined />
   },
   {
     title: 'Profile',
-    path: '/',
+    path: '/profile',
     icon: <UserOutlined />
   },
   {
     title: 'Sign In',
-    path: '/',
+    path: '/sign-in',
     icon: <LockOutlined />
   },
   {
     title: 'RTL Admin',
-    path: '/',
+    path: '/rtl-admin',
     icon: <SettingOutlined />
   }
 ];
