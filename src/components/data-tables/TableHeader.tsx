@@ -14,7 +14,7 @@ const TableHeader = ({ title, onAddItem }: IProps) => {
   const actionMenuItems: MenuProps['items'] = [
     {
       key: 'add',
-      label: 'Add Data',
+      label: 'Add Item',
       icon: <PlusOutlined />
     }
   ];
