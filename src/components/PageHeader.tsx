@@ -1,11 +1,19 @@
-import { Avatar, Card, Input, Space } from 'antd';
+/* eslint-disable simple-import-sort/imports */
+'use client';
 
+import { Avatar, Card, Input, Space } from 'antd';
+import { usePathname } from 'next/navigation';
+
+import { navItems } from '@/utils/config';
 import { BellOutlined, InfoOutlined, ProductOutlined, SearchOutlined } from '@ant-design/icons';
 
 const PageHeader = () => {
+  const pathname = usePathname();
+  const navData = navItems.find((item) => item.path === pathname);
+
   return (
     <div className="sticky top-0 mb-8 flex items-center justify-between rounded-xl p-3 backdrop-blur-md">
-      <h1 className="text-3xl font-bold">Data Tables</h1>
+      <h1 className="text-3xl font-bold">{navData?.title}</h1>
       <div>
         <Card size="small" className="!rounded-full">
           <Space size="middle">
