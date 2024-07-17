@@ -35,6 +35,9 @@ export default function RootLayout({
                   colorBgContainer: '#f0f9ff',
                   lineWidth: 0,
                   controlHeight: 38
+                },
+                Progress: {
+                  defaultColor: '#422AFB'
                 }
               }
             }}

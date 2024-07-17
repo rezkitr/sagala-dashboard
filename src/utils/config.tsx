@@ -1,11 +1,14 @@
 import { INavItem } from '@/interfaces';
 import {
+  AndroidOutlined,
+  AppleOutlined,
   BarChartOutlined,
   HomeOutlined,
   LockOutlined,
   SettingOutlined,
   ShoppingCartOutlined,
-  UserOutlined
+  UserOutlined,
+  WindowsOutlined
 } from '@ant-design/icons';
 
 export const navItems: INavItem[] = [
@@ -40,3 +43,22 @@ export const navItems: INavItem[] = [
     icon: <SettingOutlined />
   }
 ];
+
+export const techTypeData = {
+  android: {
+    key: 'android',
+    icon: <AndroidOutlined />
+  },
+  ios: {
+    key: 'ios',
+    icon: <AppleOutlined />
+  },
+  windows: {
+    key: 'windows',
+    icon: <WindowsOutlined />
+  }
+};
+
+export const dateFormats = {
+  shortDate: 'DD.MMM.YYYY'
+};
