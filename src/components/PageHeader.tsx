@@ -12,7 +12,7 @@ const PageHeader = () => {
   const navData = navItems.find((item) => item.path === pathname);
 
   return (
-    <div className="sticky top-0 mb-8 flex items-center justify-between rounded-xl p-3 backdrop-blur-md">
+    <div className="sticky top-0 z-10 mb-8 flex items-center justify-between rounded-xl p-3 backdrop-blur-md">
       <h1 className="text-3xl font-bold">{navData?.title}</h1>
       <div>
         <Card size="small" className="!rounded-full">

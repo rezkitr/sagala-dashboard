@@ -27,6 +27,10 @@ export default function RootLayout({
           <ConfigProvider
             theme={{
               components: {
+                Button: {
+                  defaultBg: '#ecfeff',
+                  colorText: '#422AFB'
+                },
                 Input: {
                   colorBgContainer: '#f0f9ff',
                   lineWidth: 0,
