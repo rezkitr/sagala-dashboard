@@ -13,3 +13,11 @@ export interface IDevelopmentItem {
   date: Date;
   progress: number;
 }
+
+export interface ICheckItem {
+  id: string;
+  name: string;
+  progress: number;
+  qty: number;
+  date: Date;
+}

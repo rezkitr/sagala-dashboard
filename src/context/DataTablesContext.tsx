@@ -4,16 +4,22 @@
 
 import React, { createContext, useState } from 'react';
 
-import { IDevelopmentItem } from '@/interfaces';
+import { ICheckItem, IDevelopmentItem } from '@/interfaces';
 import { techTypeData } from '@/utils/config';
 
 interface DataTablesContextValues {
   openAddDevelopmentItemModal: boolean;
   setOpenAddDevelopmentItemModal: (v: boolean) => void;
+  openAddCheckItemModal: boolean;
+  setOpenAddCheckItemModal: (v: boolean) => void;
   developmentData: IDevelopmentItem[];
   filteredDevelopmentData: IDevelopmentItem[] | null;
+  checkData: ICheckItem[];
+  filteredCheckData: ICheckItem[] | null;
   addDevelopmentItem: (d: IDevelopmentItem) => void;
   deleteDevelopmentItem: (id: string) => void;
+  addCheckItem: (d: ICheckItem) => void;
+  deleteCheckItem: (id: string) => void;
   searchData: (k: string) => void;
 }
 
@@ -22,6 +28,7 @@ export const DataTablesContext = createContext<DataTablesContextValues>();
 
 const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   const [openAddDevelopmentItemModal, setOpenAddDevelopmentItemModal] = useState<boolean>(false);
+  const [openAddCheckItemModal, setOpenAddCheckItemModal] = useState<boolean>(false);
   const [developmentData, setDevelopmentData] = useState<IDevelopmentItem[]>([
     {
       id: 'dev-1',
@@ -41,6 +48,16 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   const [filteredDevelopmentData, setFilteredDevelopmentData] = useState<IDevelopmentItem[] | null>(
     null
   );
+  const [checkData, setCheckData] = useState<ICheckItem[]>([
+    {
+      id: 'check-1',
+      name: 'Marketplace',
+      progress: 32,
+      qty: 12,
+      date: new Date()
+    }
+  ]);
+  const [filteredCheckData, setFilteredCheckData] = useState<ICheckItem[] | null>(null);
 
   const addDevelopmentItem = (item: IDevelopmentItem) => {
     const newData = [...developmentData, item];
@@ -52,15 +69,30 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     setDevelopmentData(newData);
   };
 
+  const addCheckItem = (item: ICheckItem) => {
+    const newData = [...checkData, item];
+    setCheckData(newData);
+  };
+
+  const deleteCheckItem = (id: string) => {
+    const newData = checkData.filter((item) => item.id !== id);
+    setCheckData(newData);
+  };
+
   const searchData = (keyword: string) => {
     if (!keyword) {
       setFilteredDevelopmentData(null);
+      setFilteredCheckData(null);
       return;
     }
-    const filteredData = developmentData.filter((item) =>
+    const newDevelopmentData = developmentData.filter((item) =>
       item.name.toLowerCase().includes(keyword.toLowerCase())
     );
-    setFilteredDevelopmentData(filteredData);
+    const newCheckData = checkData.filter((item) =>
+      item.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilteredDevelopmentData(newDevelopmentData);
+    setFilteredCheckData(newCheckData);
   };
 
   return (
@@ -68,10 +100,16 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         openAddDevelopmentItemModal,
         setOpenAddDevelopmentItemModal,
+        openAddCheckItemModal,
+        setOpenAddCheckItemModal,
         developmentData,
         filteredDevelopmentData,
+        checkData,
+        filteredCheckData,
         addDevelopmentItem,
         deleteDevelopmentItem,
+        addCheckItem,
+        deleteCheckItem,
         searchData
       }}
     >
