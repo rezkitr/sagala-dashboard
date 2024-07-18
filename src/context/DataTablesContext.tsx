@@ -140,6 +140,7 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
       setFilteredDevelopmentData(null);
       setFilteredCheckData(null);
       setFilteredFourColumnData(null);
+      setFilteredComplexData(null);
       return;
     }
     const newDevelopmentData = developmentData.filter((item) =>
