@@ -1,5 +1,12 @@
+import { PageHeader } from '@/components';
+
 const ProfilePage = () => {
-  return <div>ProfilePage</div>;
+  return (
+    <>
+      <PageHeader pageTitle="Profile" />
+      <div>ProfilePage</div>
+    </>
+  );
 };
 
 export default ProfilePage;

@@ -1,5 +1,12 @@
+import { PageHeader } from '@/components';
+
 const SignInPage = () => {
-  return <div>SignInPage</div>;
+  return (
+    <>
+      <PageHeader pageTitle="Sign In" />
+      <div>SignInPage</div>
+    </>
+  );
 };
 
 export default SignInPage;

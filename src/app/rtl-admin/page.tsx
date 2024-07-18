@@ -1,5 +1,12 @@
+import { PageHeader } from '@/components';
+
 const RtlAdminPage = () => {
-  return <div>RtlAdminPage</div>;
+  return (
+    <>
+      <PageHeader pageTitle="RTL Admin" />
+      <div>RtlAdminPage</div>
+    </>
+  );
 };
 
 export default RtlAdminPage;

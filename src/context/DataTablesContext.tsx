@@ -39,7 +39,7 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   ]);
   const [filteredDevelopmentData, setFilteredDevelopmentData] = useState<IDevelopmentItem[] | null>(
-    developmentData
+    null
   );
 
   const addDevelopmentItem = (item: IDevelopmentItem) => {

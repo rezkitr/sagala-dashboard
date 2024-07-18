@@ -10,14 +10,13 @@ import { useCallback } from 'react';
 interface IProps {
   pageTitle: string;
   // eslint-disable-next-line no-unused-vars
-  onSearch: (k: string) => void;
+  onSearch?: (k: string) => void;
 }
 
-const PageHeader = ({ pageTitle, onSearch }: IProps) => {
+const PageHeader = ({ pageTitle, onSearch = () => {} }: IProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((keyword) => {
-      console.log('>>>', keyword);
       onSearch(keyword);
     }, 300),
     [onSearch]

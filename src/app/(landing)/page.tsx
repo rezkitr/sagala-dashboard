@@ -1,5 +1,12 @@
+import { PageHeader } from '@/components';
+
 const LandingPage = () => {
-  return <div>LandingPage</div>;
+  return (
+    <>
+      <PageHeader pageTitle="Main Dashboard" />
+      <div>LandingPage</div>
+    </>
+  );
 };
 
 export default LandingPage;
