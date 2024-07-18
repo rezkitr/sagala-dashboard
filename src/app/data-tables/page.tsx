@@ -5,7 +5,12 @@ import { Card, Col, Row } from 'antd';
 import { useContext } from 'react';
 
 import { PageHeader } from '@/components';
-import { CheckTable, DevelopmentTable, FourColumnTable } from '@/components/data-tables';
+import {
+  CheckTable,
+  ComplexTable,
+  DevelopmentTable,
+  FourColumnTable
+} from '@/components/data-tables';
 import { DataTablesContext } from '@/context/DataTablesContext';
 
 const DataTablesPage = () => {
@@ -31,7 +36,7 @@ const DataTablesPage = () => {
         </Col>
         <Col xs={24} lg={12}>
           <Card className="!min-h-[720px] !overflow-x-auto">
-            <CheckTable />
+            <ComplexTable />
           </Card>
         </Col>
       </Row>

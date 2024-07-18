@@ -65,3 +65,18 @@ export const techTypeData = {
 export const dateFormats = {
   shortDate: 'DD.MMM.YYYY'
 };
+
+export const statusTypeData = {
+  success: {
+    label: 'Approved',
+    key: 'success'
+  },
+  error: {
+    label: 'Error',
+    key: 'error'
+  },
+  disable: {
+    label: 'Disable',
+    key: 'warning'
+  }
+};

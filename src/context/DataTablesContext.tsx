@@ -4,8 +4,8 @@
 
 import React, { createContext, useState } from 'react';
 
-import { ICheckItem, IDevelopmentItem, IFourColumnItem } from '@/interfaces';
-import { techTypeData } from '@/utils/config';
+import { ICheckItem, IComplexItem, IDevelopmentItem, IFourColumnItem } from '@/interfaces';
+import { statusTypeData, techTypeData } from '@/utils/config';
 
 interface DataTablesContextValues {
   openAddDevelopmentItemModal: boolean;
@@ -14,18 +14,24 @@ interface DataTablesContextValues {
   setOpenAddCheckItemModal: (v: boolean) => void;
   openAddFourColumnItemModal: boolean;
   setOpenAddFourColumnItemModal: (v: boolean) => void;
+  openAddComplexItemModal: boolean;
+  setOpenAddComplexItemModal: (v: boolean) => void;
   developmentData: IDevelopmentItem[];
   filteredDevelopmentData: IDevelopmentItem[] | null;
   checkData: ICheckItem[];
   filteredCheckData: ICheckItem[] | null;
   fourColumnData: IFourColumnItem[];
   filteredFourColumnData: IFourColumnItem[] | null;
+  complexData: IComplexItem[];
+  filteredComplexData: IComplexItem[] | null;
   addDevelopmentItem: (d: IDevelopmentItem) => void;
   deleteDevelopmentItem: (id: string) => void;
   addCheckItem: (d: ICheckItem) => void;
   deleteCheckItem: (id: string) => void;
   addFourColumnItem: (d: IFourColumnItem) => void;
   deleteFourColumnItem: (id: string) => void;
+  addComplexItem: (d: IComplexItem) => void;
+  deleteComplexItem: (id: string) => void;
   searchData: (k: string) => void;
 }
 
@@ -36,6 +42,7 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   const [openAddDevelopmentItemModal, setOpenAddDevelopmentItemModal] = useState<boolean>(false);
   const [openAddCheckItemModal, setOpenAddCheckItemModal] = useState<boolean>(false);
   const [openAddFourColumnItemModal, setOpenAddFourColumnItemModal] = useState<boolean>(false);
+  const [openAddComplexItemModal, setOpenAddComplexItemModal] = useState<boolean>(false);
   const [developmentData, setDevelopmentData] = useState<IDevelopmentItem[]>([
     {
       id: 'dev-1',
@@ -77,6 +84,16 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   const [filteredFourColumnData, setFilteredFourColumnData] = useState<IFourColumnItem[] | null>(
     null
   );
+  const [complexData, setComplexData] = useState<IComplexItem[]>([
+    {
+      id: 'complex-1',
+      name: 'Marketplace',
+      progress: 76,
+      status: statusTypeData.success.key,
+      date: new Date()
+    }
+  ]);
+  const [filteredComplexData, setFilteredComplexData] = useState<IComplexItem[] | null>(null);
 
   const addDevelopmentItem = (item: IDevelopmentItem) => {
     const newData = [...developmentData, item];
@@ -108,6 +125,16 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     setFourColumnData(newData);
   };
 
+  const addComplexItem = (item: IComplexItem) => {
+    const newData = [...complexData, item];
+    setComplexData(newData);
+  };
+
+  const deleteComplexItem = (id: string) => {
+    const newData = complexData.filter((item) => item.id !== id);
+    setComplexData(newData);
+  };
+
   const searchData = (keyword: string) => {
     if (!keyword) {
       setFilteredDevelopmentData(null);
@@ -124,9 +151,13 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     const newFourColumnData = fourColumnData.filter((item) =>
       item.name.toLowerCase().includes(keyword.toLowerCase())
     );
+    const newComplexData = complexData.filter((item) =>
+      item.name.toLowerCase().includes(keyword.toLowerCase())
+    );
     setFilteredDevelopmentData(newDevelopmentData);
     setFilteredCheckData(newCheckData);
     setFilteredFourColumnData(newFourColumnData);
+    setFilteredComplexData(newComplexData);
   };
 
   return (
@@ -138,18 +169,24 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
         setOpenAddCheckItemModal,
         openAddFourColumnItemModal,
         setOpenAddFourColumnItemModal,
+        openAddComplexItemModal,
+        setOpenAddComplexItemModal,
         developmentData,
         filteredDevelopmentData,
         checkData,
         filteredCheckData,
         fourColumnData,
         filteredFourColumnData,
+        complexData,
+        filteredComplexData,
         addDevelopmentItem,
         deleteDevelopmentItem,
         addCheckItem,
         deleteCheckItem,
         addFourColumnItem,
         deleteFourColumnItem,
+        addComplexItem,
+        deleteComplexItem,
         searchData
       }}
     >

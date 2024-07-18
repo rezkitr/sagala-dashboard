@@ -29,3 +29,11 @@ export interface IFourColumnItem {
   qty: number;
   date: Date;
 }
+
+export interface IComplexItem {
+  id: string;
+  name: string;
+  status: string;
+  date: Date;
+  progress: number;
+}
