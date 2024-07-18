@@ -14,8 +14,12 @@ import TableHeader from './TableHeader';
 import AddDevelopmentItem from './modals/AddDevelopmentItem';
 
 const DevelopmentTable = () => {
-  const { developmentData, deleteDevelopmentItem, setOpenAddDevelopmentItemModal } =
-    useContext(DataTablesContext);
+  const {
+    developmentData,
+    filteredDevelopmentData,
+    deleteDevelopmentItem,
+    setOpenAddDevelopmentItemModal
+  } = useContext(DataTablesContext);
 
   const columns: TableProps<IDevelopmentItem>['columns'] = [
     {
@@ -71,7 +75,7 @@ const DevelopmentTable = () => {
         title="Development Table"
         onAddItem={() => setOpenAddDevelopmentItemModal(true)}
       />
-      <Table columns={columns} dataSource={developmentData} />
+      <Table columns={columns} dataSource={filteredDevelopmentData ?? developmentData} />
       <AddDevelopmentItem />
     </div>
   );

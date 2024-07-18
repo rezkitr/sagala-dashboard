@@ -11,8 +11,10 @@ interface DataTablesContextValues {
   openAddDevelopmentItemModal: boolean;
   setOpenAddDevelopmentItemModal: (v: boolean) => void;
   developmentData: IDevelopmentItem[];
+  filteredDevelopmentData: IDevelopmentItem[] | null;
   addDevelopmentItem: (d: IDevelopmentItem) => void;
   deleteDevelopmentItem: (id: string) => void;
+  searchData: (k: string) => void;
 }
 
 // @ts-ignore
@@ -36,6 +38,9 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
       date: new Date()
     }
   ]);
+  const [filteredDevelopmentData, setFilteredDevelopmentData] = useState<IDevelopmentItem[] | null>(
+    developmentData
+  );
 
   const addDevelopmentItem = (item: IDevelopmentItem) => {
     const newData = [...developmentData, item];
@@ -43,8 +48,19 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const deleteDevelopmentItem = (id: string) => {
-    const newData = developmentData.filter((data) => data.id !== id);
+    const newData = developmentData.filter((item) => item.id !== id);
     setDevelopmentData(newData);
+  };
+
+  const searchData = (keyword: string) => {
+    if (!keyword) {
+      setFilteredDevelopmentData(null);
+      return;
+    }
+    const filteredData = developmentData.filter((item) =>
+      item.name.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setFilteredDevelopmentData(filteredData);
   };
 
   return (
@@ -53,8 +69,10 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
         openAddDevelopmentItemModal,
         setOpenAddDevelopmentItemModal,
         developmentData,
+        filteredDevelopmentData,
         addDevelopmentItem,
-        deleteDevelopmentItem
+        deleteDevelopmentItem,
+        searchData
       }}
     >
       {children}

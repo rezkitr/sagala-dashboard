@@ -3,9 +3,10 @@ import { ConfigProvider } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { PageHeader, SideMenu } from '@/components';
+import { SideMenu } from '@/components';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 
+import DataTablesProvider from '@/context/DataTablesContext';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -40,13 +41,12 @@ export default function RootLayout({
               }
             }}
           >
-            <div className="flex min-h-screen">
-              <SideMenu />
-              <div className="max-h-screen flex-1 overflow-auto px-8 py-8">
-                <PageHeader />
-                {children}
+            <DataTablesProvider>
+              <div className="flex min-h-screen">
+                <SideMenu />
+                <div className="max-h-screen flex-1 overflow-auto px-8 py-8">{children}</div>
               </div>
-            </div>
+            </DataTablesProvider>
           </ConfigProvider>
         </AntdRegistry>
       </body>

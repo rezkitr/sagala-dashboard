@@ -1,11 +1,18 @@
-import { Card, Col, Row } from 'antd';
+/* eslint-disable simple-import-sort/imports */
+'use client';
 
+import { Card, Col, Row } from 'antd';
+import { useContext } from 'react';
+
+import { PageHeader } from '@/components';
 import { CheckTable, DevelopmentTable } from '@/components/data-tables';
-import DataTablesProvider from '@/context/DataTablesContext';
+import { DataTablesContext } from '@/context/DataTablesContext';
 
 const DataTablesPage = () => {
+  const { searchData } = useContext(DataTablesContext);
   return (
-    <DataTablesProvider>
+    <>
+      <PageHeader pageTitle="Data Tables" onSearch={searchData} />
       <Row gutter={[16, 20]}>
         <Col span={12}>
           <Card className="!min-h-[720px]">
@@ -28,7 +35,7 @@ const DataTablesPage = () => {
           </Card>
         </Col>
       </Row>
-    </DataTablesProvider>
+    </>
   );
 };
 

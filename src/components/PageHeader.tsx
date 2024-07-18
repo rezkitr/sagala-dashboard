@@ -2,14 +2,26 @@
 'use client';
 
 import { Avatar, Breadcrumb, Card, ConfigProvider, Input, Space } from 'antd';
-import { usePathname } from 'next/navigation';
+import debounce from 'lodash/debounce';
 
-import { navItems } from '@/utils/config';
 import { BellOutlined, InfoOutlined, ProductOutlined, SearchOutlined } from '@ant-design/icons';
+import { useCallback } from 'react';
 
-const PageHeader = () => {
-  const pathname = usePathname();
-  const navData = navItems.find((item) => item.path === pathname);
+interface IProps {
+  pageTitle: string;
+  // eslint-disable-next-line no-unused-vars
+  onSearch: (k: string) => void;
+}
+
+const PageHeader = ({ pageTitle, onSearch }: IProps) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleSearch = useCallback(
+    debounce((keyword) => {
+      console.log('>>>', keyword);
+      onSearch(keyword);
+    }, 300),
+    [onSearch]
+  );
 
   return (
     <ConfigProvider
@@ -25,8 +37,8 @@ const PageHeader = () => {
     >
       <div className="sticky top-0 z-10 mb-8 flex items-center justify-between rounded-xl p-3 backdrop-blur-md">
         <div>
-          <Breadcrumb items={[{ title: 'Page' }, { title: navData?.title }]} />
-          <h1 className="mt-1 text-3xl font-bold">{navData?.title}</h1>
+          <Breadcrumb items={[{ title: 'Page' }, { title: pageTitle }]} />
+          <h1 className="mt-1 text-3xl font-bold">{pageTitle}</h1>
         </div>
         <div>
           <Card size="small" className="!rounded-full">
@@ -35,6 +47,7 @@ const PageHeader = () => {
                 placeholder="Search..."
                 prefix={<SearchOutlined />}
                 className="!rounded-full"
+                onChange={(e) => handleSearch(e.target.value)}
               />
               <BellOutlined className="text-base" />
               <InfoOutlined className="text-base" />
