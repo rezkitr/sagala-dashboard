@@ -1,11 +1,18 @@
 /* eslint-disable simple-import-sort/imports */
 'use client';
 
-import { Avatar, Breadcrumb, Card, ConfigProvider, Input, Space } from 'antd';
+import { Avatar, Breadcrumb, Button, Card, ConfigProvider, Input, Space } from 'antd';
 import debounce from 'lodash/debounce';
 
-import { BellOutlined, InfoOutlined, ProductOutlined, SearchOutlined } from '@ant-design/icons';
-import { useCallback } from 'react';
+import { LayoutContext } from '@/context/LayoutContext';
+import {
+  BellOutlined,
+  InfoOutlined,
+  MenuOutlined,
+  ProductOutlined,
+  SearchOutlined
+} from '@ant-design/icons';
+import { useCallback, useContext } from 'react';
 
 interface IProps {
   pageTitle: string;
@@ -14,6 +21,8 @@ interface IProps {
 }
 
 const PageHeader = ({ pageTitle, onSearch = () => {} }: IProps) => {
+  const { setOpenSideMenu } = useContext(LayoutContext);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(
     debounce((keyword) => {
@@ -34,7 +43,7 @@ const PageHeader = ({ pageTitle, onSearch = () => {} }: IProps) => {
         }
       }}
     >
-      <div className="sticky top-0 z-10 mb-8 flex items-center justify-between rounded-xl p-3 backdrop-blur-md">
+      <div className="sticky top-0 z-10 mb-8 flex flex-col justify-between gap-y-3 rounded-xl p-3 backdrop-blur-md md:flex-row md:items-center">
         <div>
           <Breadcrumb items={[{ title: 'Page' }, { title: pageTitle }]} />
           <h1 className="mt-1 text-3xl font-bold">{pageTitle}</h1>
@@ -47,6 +56,12 @@ const PageHeader = ({ pageTitle, onSearch = () => {} }: IProps) => {
                 prefix={<SearchOutlined />}
                 className="!rounded-full"
                 onChange={(e) => handleSearch(e.target.value)}
+              />
+              <Button
+                type="text"
+                icon={<MenuOutlined className="text-base" />}
+                className="xl:!hidden"
+                onClick={() => setOpenSideMenu(true)}
               />
               <BellOutlined className="text-base" />
               <InfoOutlined className="text-base" />

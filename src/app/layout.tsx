@@ -7,6 +7,7 @@ import { SideMenu } from '@/components';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 import DataTablesProvider from '@/context/DataTablesContext';
+import LayoutProvider from '@/context/LayoutContext';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -41,12 +42,14 @@ export default function RootLayout({
               }
             }}
           >
-            <DataTablesProvider>
-              <div className="flex min-h-screen">
-                <SideMenu />
-                <div className="max-h-screen flex-1 overflow-auto px-8 py-8">{children}</div>
-              </div>
-            </DataTablesProvider>
+            <LayoutProvider>
+              <DataTablesProvider>
+                <div className="flex min-h-screen">
+                  <SideMenu />
+                  <div className="max-h-screen flex-1 overflow-auto px-8 py-8">{children}</div>
+                </div>
+              </DataTablesProvider>
+            </LayoutProvider>
           </ConfigProvider>
         </AntdRegistry>
       </body>

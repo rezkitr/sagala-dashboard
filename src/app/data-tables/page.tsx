@@ -14,23 +14,23 @@ const DataTablesPage = () => {
     <>
       <PageHeader pageTitle="Data Tables" onSearch={searchData} />
       <Row gutter={[16, 20]}>
-        <Col span={12}>
-          <Card className="!min-h-[720px]">
+        <Col xs={24} lg={12}>
+          <Card className="!min-h-[720px] !overflow-x-auto">
             <DevelopmentTable />
           </Card>
         </Col>
-        <Col span={12}>
-          <Card className="!min-h-[720px]">
+        <Col xs={24} lg={12}>
+          <Card className="!min-h-[720px] !overflow-x-auto">
             <CheckTable />
           </Card>
         </Col>
-        <Col span={12}>
-          <Card className="!min-h-[720px]">
+        <Col xs={24} lg={12}>
+          <Card className="!min-h-[720px] !overflow-x-auto">
             <DevelopmentTable />
           </Card>
         </Col>
-        <Col span={12}>
-          <Card className="!min-h-[720px]">
+        <Col xs={24} lg={12}>
+          <Card className="!min-h-[720px] !overflow-x-auto">
             <CheckTable />
           </Card>
         </Col>
