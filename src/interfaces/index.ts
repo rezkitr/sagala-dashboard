@@ -21,3 +21,11 @@ export interface ICheckItem {
   qty: number;
   date: Date;
 }
+
+export interface IFourColumnItem {
+  id: string;
+  name: string;
+  progress: number;
+  qty: number;
+  date: Date;
+}

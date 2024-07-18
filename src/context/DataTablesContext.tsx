@@ -4,7 +4,7 @@
 
 import React, { createContext, useState } from 'react';
 
-import { ICheckItem, IDevelopmentItem } from '@/interfaces';
+import { ICheckItem, IDevelopmentItem, IFourColumnItem } from '@/interfaces';
 import { techTypeData } from '@/utils/config';
 
 interface DataTablesContextValues {
@@ -12,14 +12,20 @@ interface DataTablesContextValues {
   setOpenAddDevelopmentItemModal: (v: boolean) => void;
   openAddCheckItemModal: boolean;
   setOpenAddCheckItemModal: (v: boolean) => void;
+  openAddFourColumnItemModal: boolean;
+  setOpenAddFourColumnItemModal: (v: boolean) => void;
   developmentData: IDevelopmentItem[];
   filteredDevelopmentData: IDevelopmentItem[] | null;
   checkData: ICheckItem[];
   filteredCheckData: ICheckItem[] | null;
+  fourColumnData: IFourColumnItem[];
+  filteredFourColumnData: IFourColumnItem[] | null;
   addDevelopmentItem: (d: IDevelopmentItem) => void;
   deleteDevelopmentItem: (id: string) => void;
   addCheckItem: (d: ICheckItem) => void;
   deleteCheckItem: (id: string) => void;
+  addFourColumnItem: (d: IFourColumnItem) => void;
+  deleteFourColumnItem: (id: string) => void;
   searchData: (k: string) => void;
 }
 
@@ -29,6 +35,7 @@ export const DataTablesContext = createContext<DataTablesContextValues>();
 const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
   const [openAddDevelopmentItemModal, setOpenAddDevelopmentItemModal] = useState<boolean>(false);
   const [openAddCheckItemModal, setOpenAddCheckItemModal] = useState<boolean>(false);
+  const [openAddFourColumnItemModal, setOpenAddFourColumnItemModal] = useState<boolean>(false);
   const [developmentData, setDevelopmentData] = useState<IDevelopmentItem[]>([
     {
       id: 'dev-1',
@@ -58,6 +65,18 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   ]);
   const [filteredCheckData, setFilteredCheckData] = useState<ICheckItem[] | null>(null);
+  const [fourColumnData, setFourColumnData] = useState<IFourColumnItem[]>([
+    {
+      id: 'column-1',
+      name: 'Marketplace',
+      progress: 28,
+      qty: 19,
+      date: new Date()
+    }
+  ]);
+  const [filteredFourColumnData, setFilteredFourColumnData] = useState<IFourColumnItem[] | null>(
+    null
+  );
 
   const addDevelopmentItem = (item: IDevelopmentItem) => {
     const newData = [...developmentData, item];
@@ -79,10 +98,21 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     setCheckData(newData);
   };
 
+  const addFourColumnItem = (item: IFourColumnItem) => {
+    const newData = [...fourColumnData, item];
+    setFourColumnData(newData);
+  };
+
+  const deleteFourColumnItem = (id: string) => {
+    const newData = fourColumnData.filter((item) => item.id !== id);
+    setFourColumnData(newData);
+  };
+
   const searchData = (keyword: string) => {
     if (!keyword) {
       setFilteredDevelopmentData(null);
       setFilteredCheckData(null);
+      setFilteredFourColumnData(null);
       return;
     }
     const newDevelopmentData = developmentData.filter((item) =>
@@ -91,8 +121,12 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
     const newCheckData = checkData.filter((item) =>
       item.name.toLowerCase().includes(keyword.toLowerCase())
     );
+    const newFourColumnData = fourColumnData.filter((item) =>
+      item.name.toLowerCase().includes(keyword.toLowerCase())
+    );
     setFilteredDevelopmentData(newDevelopmentData);
     setFilteredCheckData(newCheckData);
+    setFilteredFourColumnData(newFourColumnData);
   };
 
   return (
@@ -102,14 +136,20 @@ const DataTablesProvider = ({ children }: { children: React.ReactNode }) => {
         setOpenAddDevelopmentItemModal,
         openAddCheckItemModal,
         setOpenAddCheckItemModal,
+        openAddFourColumnItemModal,
+        setOpenAddFourColumnItemModal,
         developmentData,
         filteredDevelopmentData,
         checkData,
         filteredCheckData,
+        fourColumnData,
+        filteredFourColumnData,
         addDevelopmentItem,
         deleteDevelopmentItem,
         addCheckItem,
         deleteCheckItem,
+        addFourColumnItem,
+        deleteFourColumnItem,
         searchData
       }}
     >
